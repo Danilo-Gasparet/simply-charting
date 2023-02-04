@@ -4,7 +4,7 @@ export function processBarChartData(data) {
 
   for (let year of data) {
     let tempArray = [];
-    
+
     const sortedCountries = sortCountriesByPopSize(year.Countries);
 
     for (let i = 0; i < sortedCountries.length; i++) {
@@ -20,7 +20,6 @@ export function processBarChartData(data) {
     }
     dataMap.set(year.Year, tempArray);
   }
-  console.log(dataMap)
   return dataMap;
 };
 

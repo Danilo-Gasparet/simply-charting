@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { processBarChartData } from "./utils/utils";
 import Navbar from "./components/Navbar/Navbar";
 import Filters from "./components/Filters/Filters.js";
+import Timer from "./components/Countdown/Countdown";
 import Loading from "./components/States/Loading";
 import BarChart from "./components/Charts/BarChart/BarChart";
 
@@ -16,20 +17,17 @@ function App() {
   // Storing the year as a state variable
   const [dataMap, setDataMap] = useState(new Map());
 
-
-  // use effect hook
+  // Use effect hook to process the data, and display a loading screen if needed.
   useEffect(() => {
     if (loading) {
       setDataMap(processBarChartData(data));
       setLoading(false);
-    } else {
-      // Todo
-    }
+    } 
   });
 
   return (
-    <div className="shell">
-      <div className="Navbar">
+    <div className="shell bg-zinc-700 font-Monaco text-zinc-100">
+      <div className="navbar">
         <Navbar></Navbar>
       </div>
       {loading ? (
@@ -37,14 +35,19 @@ function App() {
           <Loading></Loading>
         </div>
       ) : (
-        <>
-          <div className="graph">
-            <BarChart></BarChart>
+        <div className="content-area p-5">
+          <div className="graph mb-16">
+            <BarChart dataMap={dataMap}></BarChart>
           </div>
+          {/** 
           <div className="filters">
             <Filters></Filters>
           </div>
-        </>
+          <div className="filters">
+            <Timer seconds={60}></Timer>
+          </div>
+          */}
+        </div>
       )}
     </div>
   );
