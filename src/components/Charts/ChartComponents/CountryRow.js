@@ -1,8 +1,7 @@
-import styled, { keyframes } from 'styled-components';
-import "./BarChart.css";
-
+import "./CountryRow.css";
 
 const CountryRow = (props) => {
+    // Initializing a style object that will be added to the bar 
     const barStyle = {
       '--from-width': props.country.PrevPopulationPercentage + '%', 
       '--to-width': props.country.CurrPopulationPercentage + '%',
@@ -19,7 +18,7 @@ const CountryRow = (props) => {
 
         {/* Column 2 displaying the relative population size to largest as a percentage. This will be displayed as a growing bar */}
         <div className="col-span-8" >
-          <div style={barStyle} className="graph-bar h-4 my-1 bg-lime-300/50 border shadow rounded-md border-lime-300"></div>
+          <div style={barStyle} className="h-4 my-1 bg-lime-300/50 border shadow rounded-md border-lime-300"></div>
         </div>
 
         {/* Column 3 displaying the population size as a number */}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CountryRow from "./CountryRow";
+import CountryRow from "../ChartComponents/CountryRow";
 
 const BarChart = ({dataMap}) => {
   const dataArray = Array.from(dataMap, ([year, countries]) => ({ year, countries }));
@@ -13,21 +13,21 @@ const BarChart = ({dataMap}) => {
   useEffect(() => {
     // Exit early when we reach the final year
     if (yearIndex >= dataArray.length){
-      setYearData(dataArray[0]);
-      setYearIndex(0);
+      setYearData([]);
+      setYearIndex(0)
     };
 
     // Save intervalId to clear the interval when the component re-renders
     const intervalId = setInterval(() => {
       setYearData(dataArray[yearIndex]);
-      setYearIndex(yearIndex + 1);
+      setYearIndex(yearIndex + 1)
     // If we are just starting the list dont wait 5s 
     }, yearIndex === 0 ? 0 : 5000);
 
     // clear interval on re-render to avoid memory leaks
     return () => clearInterval(intervalId);
     // Add yearData as a dependency to re-rerun the effect when the va;ue is updated
-  }, [yearData]);
+  }, [yearData, dataArray, yearIndex]);
 
 
   // ToDo - Improve responsiveness for smaller devices like mobile
@@ -55,8 +55,8 @@ const BarChart = ({dataMap}) => {
         {/* Iterate over the current years countries and their data */}
         {
           yearData.countries.map((country) => (
-            <div /*style={orderStyle(country)}*/>
-              <CountryRow country={country}  key={country._id}></CountryRow>
+            <div key={country._id} /*style={orderStyle(country)}*/>
+              <CountryRow country={country}></CountryRow>
             </div>
           ))}
       </div>
