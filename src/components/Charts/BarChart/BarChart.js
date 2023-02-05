@@ -12,12 +12,15 @@ const BarChart = ({dataMap}) => {
    
   useEffect(() => {
     // Exit early when we reach the final year
-    if (yearIndex >= dataArray.length) return;
+    if (yearIndex >= dataArray.length){
+      setYearData(dataArray[0]);
+      setYearIndex(0);
+    };
 
     // Save intervalId to clear the interval when the component re-renders
     const intervalId = setInterval(() => {
       setYearData(dataArray[yearIndex]);
-      setYearIndex(yearIndex + 1)
+      setYearIndex(yearIndex + 1);
     // If we are just starting the list dont wait 5s 
     }, yearIndex === 0 ? 0 : 5000);
 

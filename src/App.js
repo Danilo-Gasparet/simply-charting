@@ -2,8 +2,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import { processBarChartData } from "./utils/utils";
 import Navbar from "./components/Navbar/Navbar";
-//import Filters from "./components/Filters/Filters.js";
-//import Timer from "./components/Countdown/Countdown";
+import ControlPanel from "./components/ControlPanel/ControlPanel";
 import Loading from "./components/States/Loading";
 import BarChart from "./components/Charts/BarChart/BarChart";
 
@@ -20,34 +19,29 @@ function App() {
   // Use effect hook to process the data, and display a loading screen if needed.
   useEffect(() => {
     if (loading) {
-      setDataMap(processBarChartData(data));
-      setLoading(false);
-    } 
+      setTimeout(function() {
+        setDataMap(processBarChartData(data));
+        setLoading(false);
+      }, 2000);
+    }
   });
 
   return (
-    <div className="shell bg-zinc-700 font-Monaco text-zinc-100 h-screen">
-      <div className="navbar">
-        <Navbar></Navbar>
-      </div>
+    <div className="bg-zinc-700 font-Monaco text-zinc-100 min-h-screen">
+      <Navbar></Navbar>
       {loading ? (
-        <div className="loading">
+        <>
           <Loading></Loading>
-        </div>
+        </>
       ) : (
-        <div className="content-area p-5">
-          <div className="graph mb-16">
+        <>
+          <div className="p-8 mb-8">
             <BarChart dataMap={dataMap}></BarChart>
           </div>
-          {/** 
-          <div className="filters">
-            <Filters></Filters>
+          <div>
+            <ControlPanel></ControlPanel>
           </div>
-          <div className="filters">
-            <Timer seconds={60}></Timer>
-          </div>
-          */}
-        </div>
+        </>
       )}
     </div>
   );
