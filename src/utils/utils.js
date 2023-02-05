@@ -33,7 +33,7 @@ function getPrevRank(country, prevYearArray){
 };
 
 function getPrevPopPercentage(country, prevYearArray){
-    return prevYearArray !== undefined ? prevYearArray[getPrevRank(country, prevYearArray)].CurrPopulationPercentage : null;
+    return prevYearArray !== undefined ? prevYearArray[getPrevRank(country, prevYearArray)].CurrPopulationPercentage : 0;
 };
 
 function getRelativeCurrPopPercentage(currentIndex, sortedCountries){

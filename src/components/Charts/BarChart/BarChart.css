@@ -1,0 +1,4 @@
+@keyframes example {
+    0% {width:  var(--from-width)}
+    100% {width:  var(--to-width)}
+}
