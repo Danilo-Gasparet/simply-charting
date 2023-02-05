@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CountryRow from "../ChartComponents/CountryRow";
+import "./BarChart.css";
 
 const BarChart = ({dataMap}) => {
   const dataArray = Array.from(dataMap, ([year, countries]) => ({ year, countries }));
@@ -53,27 +54,29 @@ const BarChart = ({dataMap}) => {
         </div>
   
         {/* Iterate over the current years countries and their data */}
+
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
         {
           yearData.countries.map((country) => (
-            <div key={country._id} /*style={orderStyle(country)}*/>
+            <div key={country._id} style={orderStyle(country)} >
               <CountryRow country={country}></CountryRow>
             </div>
           ))}
+        </div>      
       </div>
     );
   }
 
   function orderStyle(country){
     return{
-      'display': 'flex',
-      'flex-direction': 'col',
-      '--from-order': country.PrevRank, 
-      '--to-order': country.CurrRank,
-      'animationName': 'reorder',
-      'animationDuration': '1s',
-      'animationFillMode':'forwards'
+      '--translate-start': String((country.PrevRank - country.CurrRank)*24) + 'px', 
+      '--translate-end': 0,
+      'animationName': 're-order',
+      'animationDuration': '2s',
     }
   };
+
+  
 };
 
 export default BarChart;

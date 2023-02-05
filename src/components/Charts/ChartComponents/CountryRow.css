@@ -2,8 +2,3 @@
     0% {width:  var(--from-width)}
     100% {width:  var(--to-width)}
 }
-
-@keyframes reorder {
-    0% {order:  var(--from-order)}
-    100% {order:  var(--to-order)}
-}

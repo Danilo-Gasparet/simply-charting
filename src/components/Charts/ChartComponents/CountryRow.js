@@ -8,6 +8,7 @@ const CountryRow = (props) => {
       'animationName': 'grow-or-shrink',
       'animationDuration': '4s',
       'animationFillMode':'forwards',
+      'animationTimingFunction': 'linear',
       'backgroundColor' : 'rgba('+ props.country.Color +', 0.6)',
       'borderColor' : 'rgba('+ props.country.Color +', 1)'
     };

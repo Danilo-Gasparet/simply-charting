@@ -1,0 +1,8 @@
+@keyframes re-order {
+    0% {
+      transform: translateY(var(--translate-start));
+    }
+    100% {
+      transform: translateY(var(--translate-end)); /* CurrRank * elemnt height */
+    }
+  }
