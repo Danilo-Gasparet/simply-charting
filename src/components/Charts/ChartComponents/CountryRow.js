@@ -7,9 +7,18 @@ const CountryRow = (props) => {
       '--to-width': props.country.CurrPopulationPercentage + '%',
       'animationName': 'grow-or-shrink',
       'animationDuration': '4s',
-      'animationFillMode':'forwards'
+      'animationFillMode':'forwards',
+      'backgroundColor' : 'rgba('+ props.country.Color +', 0.6)',
+      'borderColor' : 'rgba('+ props.country.Color +', 1)'
     };
-      
+
+    const barClass = `
+      h-4 
+      my-1 
+      border shadow 
+      rounded-md
+    `
+
     return ( 
         <div className="grid grid-cols-12 gap-4">
   
@@ -18,7 +27,7 @@ const CountryRow = (props) => {
 
         {/* Column 2 displaying the relative population size to largest as a percentage. This will be displayed as a growing bar */}
         <div className="col-span-8" >
-          <div style={barStyle} className="h-4 my-1 bg-lime-300/50 border shadow rounded-md border-lime-300"></div>
+          <div style={barStyle} className={barClass}></div>
         </div>
 
         {/* Column 3 displaying the population size as a number */}
