@@ -4,6 +4,9 @@ export function processBarChartData(data, colorPallet) {
   // Console log a message to let a developer know when the processing has started.
   console.log("Processing raw data...");
 
+  // Assigning a constant value to the graph size
+  const MAX_GRAPH_SIZE = 15;
+
   // Initialize a new map that will be returned with the processed data
   const dataMap = new Map();
 
@@ -26,13 +29,15 @@ export function processBarChartData(data, colorPallet) {
             // The population, nothing changes.
             "Population": sortedCountries[i].Population,
             // The prev rank, call a method that determines the ranking (desc by pop) 
-            "PrevRank": getPrevRank(sortedCountries[i].Country, dataMap.get(Number(year.Year)-1), i),
+            "PrevRank": getPrevRank(dataMap.get(year.Year-1), sortedCountries[i].Country, MAX_GRAPH_SIZE),
             // The current rank, uses the index as the array is already sorted.
             "CurrRank": i,
             // The previous population as a relative percentage compared to the largest country that year. Call a method to get this value.
-            "PrevPopulationPercentage": getRelativePrevPopPercentage(sortedCountries[i].Country, dataMap.get(Number(year.Year)-1)),
+            "PrevPopulationPercentage": getRelativePrevPopPercentage(dataMap.get(year.Year-1), sortedCountries[i].Country, MAX_GRAPH_SIZE),
             // The current population as a relative percentage compared to the largest country this year. Call a method to get this value.
-            "CurrPopulationPercentage": getRelativeCurrPopPercentage(i, sortedCountries)
+            "CurrPopulationPercentage": getRelativeCurrPopPercentage(sortedCountries, i),
+            // The current color of the graphic
+            "Color": getColor(dataMap.get(year.Year-1), sortedCountries[i].Country, MAX_GRAPH_SIZE, getRandomColor(colorPallet))
         };
 
         // Once the object has been created push it to the temp array
@@ -53,16 +58,31 @@ function sortCountriesByPopSize(arrCountries){
 }
 
 // Function that gets the previous years rank for a specific country.
-function getPrevRank(country, prevYearArray, index){
-    return prevYearArray !== undefined ? prevYearArray.findIndex((el) => el.Country === country) : index;
-};
+function getPrevRank(arrOfCountries, countryName, defaultIndex){
+   return arrOfCountries !== undefined && countryFound(arrOfCountries, countryName) ? arrOfCountries.findIndex((el) => el.Country === countryName) : defaultIndex;  
+}
 
 // Function that calculates the previous population as a relative percentage compared to the largest country that year.
-function getRelativePrevPopPercentage(country, prevYearArray){
-    return prevYearArray !== undefined ? prevYearArray[getPrevRank(country, prevYearArray)].CurrPopulationPercentage : 0;
+function getRelativePrevPopPercentage(arrOfCountries, countryName, defaultIndex){
+    return arrOfCountries !== undefined && countryFound(arrOfCountries, countryName) ? arrOfCountries[getPrevRank(arrOfCountries, countryName, defaultIndex)].CurrPopulationPercentage : 0;
 };
 
 // Function that calculates the current population as a relative percentage compared to the largest country this year.
-function getRelativeCurrPopPercentage(currentIndex, sortedCountries){
+function getRelativeCurrPopPercentage(sortedCountries, currentIndex){
     return currentIndex === 0 ? 100 : Math.round(( sortedCountries[currentIndex].Population / sortedCountries[0].Population ) * 100);
 };
+
+// Function that returns true if a country is found in the given array
+function countryFound(arrOfCountries, countryName){
+    return arrOfCountries.findIndex((el) => el.Country === countryName) !== -1 ? true : false;
+}
+
+function getColor(arrOfCountries, countryName, defaultIndex, color){
+    return arrOfCountries !== undefined && countryFound(arrOfCountries, countryName) ? arrOfCountries[getPrevRank(arrOfCountries, countryName, defaultIndex)].Color : color;
+}
+
+// Randomly choose a color from the given color pallet
+function getRandomColor(colors){
+    return colors[Math.floor(Math.random() * colors.length)]
+}
+
