@@ -31,7 +31,7 @@ const CountryRow = (props) => {
         </div>
 
         {/* Column 3 displaying the population size as a number */}
-        <div className="col-span-2 text-right break-words" >{props.country.Population}</div>
+        <div className="col-span-2 text-zinc-400 text-right break-words" >{props.country.Population}</div>
       </div>
      );
 }

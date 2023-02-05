@@ -64,7 +64,7 @@ const BarChart = ({dataMap}) => {
   }
 
   function orderStyle(country){
-    return({
+    return{
       'display': 'flex',
       'flex-direction': 'col',
       '--from-order': country.PrevRank, 
@@ -72,7 +72,7 @@ const BarChart = ({dataMap}) => {
       'animationName': 'reorder',
       'animationDuration': '1s',
       'animationFillMode':'forwards'
-    })
+    }
   };
 };
 
