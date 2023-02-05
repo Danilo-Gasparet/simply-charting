@@ -1,9 +1,6 @@
 ## To Do ##
-
-1) Added styled components to assist with inline styling (1hrs)
-2) Animate population and ranking changes (2hrs)
-3) Improve Styling and Responsiveness (2hrs)
-4) 8) Add unit tests using jest (2hrs)
-5) Add a play/ pause button (1hrs)
-6) Add a filter (1hrs) 
-8) Prepare for production ( Bundle, minify)
+0) Animate order reshuffles
+1) Refactor and comment code, so make it cleaner and more readable
+2) Add a Play/Pause button, Add a speed option, Add a year finder
+3) Add Jest unit tests
+5) Add small screen responsiveness (Change font size and col span)
