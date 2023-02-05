@@ -2,8 +2,8 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import { processBarChartData } from "./utils/utils";
 import Navbar from "./components/Navbar/Navbar";
-import Filters from "./components/Filters/Filters.js";
-import Timer from "./components/Countdown/Countdown";
+//import Filters from "./components/Filters/Filters.js";
+//import Timer from "./components/Countdown/Countdown";
 import Loading from "./components/States/Loading";
 import BarChart from "./components/Charts/BarChart/BarChart";
 
@@ -26,7 +26,7 @@ function App() {
   });
 
   return (
-    <div className="shell bg-zinc-700 font-Monaco text-zinc-100">
+    <div className="shell bg-zinc-700 font-Monaco text-zinc-100 h-screen">
       <div className="navbar">
         <Navbar></Navbar>
       </div>

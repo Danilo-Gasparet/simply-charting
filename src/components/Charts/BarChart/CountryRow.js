@@ -2,12 +2,12 @@ import styled, { keyframes } from 'styled-components';
 import "./BarChart.css";
 
 
-const HorizontalBar = (props) => {
+const CountryRow = (props) => {
     const barStyle = {
       '--from-width': props.country.PrevPopulationPercentage + '%', 
       '--to-width': props.country.CurrPopulationPercentage + '%',
-      'animationName': 'example',
-      'animationDuration': '1s',
+      'animationName': 'grow-or-shrink',
+      'animationDuration': '4s',
       'animationFillMode':'forwards'
     };
       
@@ -28,4 +28,4 @@ const HorizontalBar = (props) => {
      );
 }
 
-export default HorizontalBar ;
+export default CountryRow ;

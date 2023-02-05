@@ -12,7 +12,8 @@ export function processBarChartData(data) {
             "_id": sortedCountries[i]._id,
             "Country": sortedCountries[i].Country,
             "Population": sortedCountries[i].Population,
-            "PrevRank": getPrevRank(sortedCountries[i].Country, dataMap.get(Number(year.Year)-1)),
+            "PrevRank": getPrevRank(sortedCountries[i].Country, dataMap.get(Number(year.Year)-1), i),
+            "CurrRank": i,
             "PrevPopulationPercentage": getPrevPopPercentage(sortedCountries[i].Country, dataMap.get(Number(year.Year)-1)),
             "CurrPopulationPercentage": getRelativeCurrPopPercentage(i, sortedCountries)
         };
@@ -28,8 +29,8 @@ function sortCountriesByPopSize(arrCountries){
     return arrCountries.sort((C1, C2) => (C1.Population < C2.Population) ? 1 : (C1.Population > C2.Population) ? -1 : 0);
 }
 
-function getPrevRank(country, prevYearArray){
-    return prevYearArray !== undefined ? prevYearArray.findIndex((el) => el.Country === country) : null;
+function getPrevRank(country, prevYearArray, index){
+    return prevYearArray !== undefined ? prevYearArray.findIndex((el) => el.Country === country) : index;
 };
 
 function getPrevPopPercentage(country, prevYearArray){

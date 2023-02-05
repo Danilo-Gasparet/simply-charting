@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
-import HorizontalBar from "./HorizontalBar";
+import CountryRow from "./CountryRow";
 
 const BarChart = ({dataMap}) => {
   const dataArray = Array.from(dataMap, ([year, countries]) => ({ year, countries }));
-
-  // Fetch the starting year from the prop. The array is already sorted. 
-  const startYear = dataArray[0].year;
-
-  // Fetch the ending year from the prop. The array is already sorted.
-  const endYear = dataArray[dataArray.length -1].year;
 
   // State Variable: A year worth of data will be updated using an effect hook in conjunction with a timer. 
   const [yearData, setYearData] = useState([]);
 
   // State Variable: A year worth of data will be updated using an effect hook in conjunction with a timer. 
   const [yearIndex, setYearIndex] = useState(0);
-
    
   useEffect(() => {
     // Exit early when we reach the final year
@@ -25,7 +18,8 @@ const BarChart = ({dataMap}) => {
     const intervalId = setInterval(() => {
       setYearData(dataArray[yearIndex]);
       setYearIndex(yearIndex + 1)
-    }, 2000);
+    // If we are just starting the list dont wait 5s 
+    }, yearIndex === 0 ? 0 : 5000);
 
     // clear interval on re-render to avoid memory leaks
     return () => clearInterval(intervalId);
@@ -58,18 +52,25 @@ const BarChart = ({dataMap}) => {
         {/* Iterate over the current years countries and their data */}
         {
           yearData.countries.map((country) => (
-            <HorizontalBar country={country}  key={country._id}></HorizontalBar>
+            <div /*style={orderStyle(country)}*/>
+              <CountryRow country={country}  key={country._id}></CountryRow>
+            </div>
           ))}
       </div>
     );
   }
 
-  function getBarStyle(country){
-    return {
-      width: country.CurrPopulationPercentage+"%",
-      
-    };
-  }
+  function orderStyle(country){
+    return({
+      'display': 'flex',
+      'flex-direction': 'col',
+      '--from-order': country.PrevRank, 
+      '--to-order': country.CurrRank,
+      'animationName': 'reorder',
+      'animationDuration': '1s',
+      'animationFillMode':'forwards'
+    })
+  };
 };
 
 export default BarChart;
