@@ -23,7 +23,7 @@ const BarChart = ({dataMap}) => {
       setYearData(dataArray[yearIndex]);
       setYearIndex(yearIndex + 1)
     // If we are just starting the list dont wait 5s 
-    }, yearIndex === 0 ? 0 : 5000);
+    }, yearIndex === 0 ? 0 : 4000);
 
     // clear interval on re-render to avoid memory leaks
     return () => clearInterval(intervalId);

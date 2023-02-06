@@ -6,7 +6,7 @@ const CountryRow = (props) => {
       '--from-width': props.country.PrevPopulationPercentage + '%', 
       '--to-width': props.country.CurrPopulationPercentage + '%',
       'animationName': 'grow-or-shrink',
-      'animationDuration': '4s',
+      'animationDuration': '3s',
       'animationFillMode':'forwards',
       'animationTimingFunction': 'linear',
       'backgroundColor' : 'rgba('+ props.country.Color +', 0.6)',
